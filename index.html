@@ -14,7 +14,7 @@
         <div class="brand-logo" aria-hidden="true">NC</div>
         <div class="brand-text">
           <h1 class="brand-title">Needs Connect</h1>
-          <div>Connecting helpers with nonprofit needs</div>
+          <div class="small muted">Connecting helpers with nonprofit needs</div>
         </div>
       </div>
 
@@ -96,7 +96,7 @@
         </div>
 
         <div class="needs-grid">
-          <!-- Need 1 -->
+          <!-- Static fallback cards -->
           <article class="need-card" aria-labelledby="n1">
             <div class="media">Food</div>
             <h4 id="n1">Family Food Package</h4>
@@ -104,12 +104,11 @@
             <div class="need-row">
               <div class="small muted">Urgent — deadline Oct 31</div>
               <div class="need-actions">
-                <button class="btn btn-accent" data-open="cart">Add to Basket</button>
+                <button class="btn" data-open="cart">Add to Basket</button>
               </div>
             </div>
           </article>
 
-          <!-- Need 2 -->
           <article class="need-card" aria-labelledby="n2">
             <div class="media">School</div>
             <h4 id="n2">School Supplies Kit</h4>
@@ -117,33 +116,7 @@
             <div class="need-row">
               <div class="small muted">Ongoing</div>
               <div class="need-actions">
-                <button class="btn btn-gold" data-open="cart">Add to Basket</button>
-              </div>
-            </div>
-          </article>
-
-          <!-- Need 3 -->
-          <article class="need-card" aria-labelledby="n3">
-            <div class="media">Clothes</div>
-            <h4 id="n3">Warm Clothing Drive</h4>
-            <p>Jackets, sweaters and thermal wear for displaced families in northern regions.</p>
-            <div class="need-row">
-              <div class="small muted">High Priority</div>
-              <div class="need-actions">
-                <button class="btn btn-accent" data-open="cart">Add to Basket</button>
-              </div>
-            </div>
-          </article>
-
-          <!-- Need 4 -->
-          <article class="need-card" aria-labelledby="n4">
-            <div class="media">Hygiene</div>
-            <h4 id="n4">Hygiene Kits</h4>
-            <p>Toiletries and sanitary items — distributed to shelters and community centers.</p>
-            <div class="need-row">
-              <div class="small muted">Frequently Needed</div>
-              <div class="need-actions">
-                <button class="btn btn-success" data-open="cart">Add to Basket</button>
+                <button class="btn" data-open="cart">Add to Basket</button>
               </div>
             </div>
           </article>
@@ -165,7 +138,7 @@
             <textarea class="textarea" rows="3" placeholder="Short description"></textarea>
           </div>
           <div class="mt-6 right">
-            <button class="btn btn-brand">Save Need</button>
+            <button class="btn">Save Need</button>
           </div>
         </div>
 
@@ -182,7 +155,7 @@
     <div class="spacer"></div>
   </main>
 
-  <!-- Modals -->
+  <!-- Overlay for modals -->
   <div class="overlay" data-overlay aria-hidden="true"></div>
 
   <!-- Cart Sidebar -->
@@ -200,36 +173,25 @@
       <div class="cart-price">$25</div>
     </div>
 
-    <div class="cart-item">
-      <div class="cart-thumb">School</div>
-      <div class="cart-meta">
-        <h4>School Supplies Kit</h4>
-        <p class="small muted">Qty: 1 • Education Foundation</p>
-      </div>
-      <div class="cart-price">$15</div>
-    </div>
-
-    <div class="cart-total">Total: $40</div>
+    <div class="cart-total">Total: $25</div>
 
     <div class="cart-actions">
-      <a href="#" class="btn btn-brand">Proceed to Checkout</a>
-      <button class="btn btn-outline-brand">Clear Basket</button>
+      <a href="#" class="btn">Proceed to Checkout</a>
+      <button class="btn">Clear Basket</button>
     </div>
-
-    <div class="mt-6 small muted">Note: U-fund Managers cannot see helper baskets.</div>
   </aside>
 
   <!-- Login Modal -->
   <div class="modal" data-modal="login" role="dialog" aria-modal="true" aria-labelledby="login-heading" aria-hidden="true">
     <button class="modal-close" data-close aria-label="Close">×</button>
     <h3 id="login-heading">Login</h3>
-    <form>
-      <input class="input" type="text" placeholder="Username" aria-label="Username" required />
-      <input class="input" type="password" placeholder="Password" aria-label="Password" required />
-      <small class="muted">Manager username: <strong>admin</strong></small>
+    <form id="login-form" novalidate>
+      <div id="login-error" class="small" style="color:#E94F37; display:none;"></div>
+      <input class="input" id="login-email" type="email" placeholder="Email" aria-label="Email" required />
+      <input class="input" id="login-password" type="password" placeholder="Password" aria-label="Password" required />
       <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Login</button>
-        <button type="button" class="btn btn-outline" data-open="signup">Sign Up</button>
+        <button type="submit" class="btn">Login</button>
+        <button type="button" class="btn" data-open="signup">Sign Up</button>
       </div>
     </form>
   </div>
@@ -238,12 +200,13 @@
   <div class="modal" data-modal="signup" role="dialog" aria-modal="true" aria-labelledby="signup-heading" aria-hidden="true">
     <button class="modal-close" data-close aria-label="Close">×</button>
     <h3 id="signup-heading">Create Account</h3>
-    <form>
-      <input class="input" type="text" placeholder="Full name" aria-label="Full name" required />
-      <input class="input" type="email" placeholder="Email address" aria-label="Email address" required />
-      <input class="input" type="password" placeholder="Password" aria-label="Password" required />
+    <form id="signup-form" novalidate>
+      <div id="signup-error" class="small" style="color:#E94F37; display:none;"></div>
+      <input class="input" id="signup-name" type="text" placeholder="Full name" aria-label="Full name" required />
+      <input class="input" id="signup-email" type="email" placeholder="Email address" aria-label="Email address" required />
+      <input class="input" id="signup-password" type="password" placeholder="Password (min 8 chars)" aria-label="Password" minlength="8" required />
       <div class="form-actions right">
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn">Create</button>
       </div>
     </form>
   </div>
@@ -260,6 +223,17 @@
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <!-- Supabase init -->
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+    window.SUPABASE_URL = 'https://xcrmpdrsgnffbnidbmmr.supabase.co';
+    window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhjcm1wZHJzZ25mZmJuaWRibW1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNDY3ODIsImV4cCI6MjA3NjcyMjc4Mn0.9tys44Srv0QeXKRK9nzxSrtQ09_QPLBynAjjPhDmo38';
+    window.supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY, {
+      auth: { persistSession: true, autoRefreshToken: true }
+    });
+  </script>
+
+  <!-- App code (single include) -->
+  <script src="app.js" type="module"></script>
 </body>
 </html>
